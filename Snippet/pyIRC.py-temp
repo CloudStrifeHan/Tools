@@ -1,6 +1,6 @@
 """
 This is a snippet using python socket() to connect, send and get basic packet.
-**Reference: https://tools.ietf.org/html/rfc1459#section-4.4.1
+**Reference: https://tools.ietf.org/html/rfc1459
              http://tech.waynesimmerson.ca/Article/learn-python-building-irc-logging-bot
 """
 
@@ -17,11 +17,11 @@ class mytarget:
     self.pass = pass
     self.receiver
    
-host = raw_input('Host: ')
-port = raw_input('Port: ')
-channel = raw_input('Channel: ')
-user = raw_input('User: ')
-receive = raw_input('Receiver: ')
+host = str(input('Host: '))
+port = input('Port: ')
+channel = input('Channel: ')
+user = str(input('User: '))
+receive = str(input('Receiver: '))
 
 server = mytarget(host,port,channel,user,pass,receiver)
 
@@ -29,10 +29,11 @@ try:
   con = socket.socket()
   con = socket.create_connection((server.host, server.port))
   
-  content = raw_input('MSG: ')
+  content = input('MSG: ')
   
-  con.send(b'PRIVMSG %s %s', %server.receiver %content)
+  con.send(('PRIVMSG %s %s', %server.receiver %content).encode())
   text = con.recv(2048)
+
   while(text != b''):
     print(text)
     
